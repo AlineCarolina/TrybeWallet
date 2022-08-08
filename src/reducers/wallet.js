@@ -1,4 +1,4 @@
-import { GET_VALUE, GET_EXPENSE } from '../actions';
+import { GET_VALUE, GET_EXPENSE, REMOVE_EXPENSES } from '../actions';
 
 const INITIAL_STATE = {
   currencies: [],
@@ -8,10 +8,15 @@ const INITIAL_STATE = {
 const reducerWallet = (state = INITIAL_STATE, action) => {
   switch (action.type) {
   case GET_VALUE:
-    return { ...state, currencies: Object.keys(action.payload) }; // precisei transformar em array pra fazer o map
+    return { ...state, currencies: action.payload };
   case GET_EXPENSE:
     return { ...state,
       expenses: [...state.expenses, { id: state.expenses.length, ...action.payload }],
+    };
+  case REMOVE_EXPENSES:
+    return {
+      ...state,
+      expenses: state.expenses.filter((expense) => expense.id !== action.payload),
     };
   default:
     return state;
