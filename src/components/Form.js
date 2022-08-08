@@ -1,21 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getValueThunk, expense } from '../actions';
+import { getValueThunk, addExpense } from '../actions';
+import '../styles/Form.css'
+import { getValue } from '../services/api';
 
 class Form extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      value: '',
+      value: '0',
       currency: 'USD',
       method: 'Dinheiro',
       tag: 'Alimentação',
       description: '',
-      exchangeRates: {},
+      exchangeRates: null,
     };
-    this.handleClick = this.handleClick.bind(this);
-    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
@@ -23,36 +23,28 @@ class Form extends React.Component {
     getCurrencies();
   }
 
-  async handleClick() {
+  handleClick = async (e) => {
+    e.preventDefault();
     const { addExpense } = this.props;
-    const fetchApi = await fetch('https://economia.awesomeapi.com.br/json/all');
-    const chaveJson = await fetchApi.json();
-    await delete chaveJson.USDT;
-    this.setState({
-      exchangeRates: chaveJson,
-    }, () => {
-      const { description, currency, value, method, tag, exchangeRates } = this.state;
-      addExpense({ description, currency, value, method, tag, exchangeRates });
-    });
+    const exchangeRates = await getValue();
+    this.setState({ exchangeRates, });
+    addExpense(this.state);
   }
 
-  // função genérica
-  handleChange({ target }) {
-    const { name } = target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
+  handleChange = ({ target: { name, value } }) => {
     this.setState({ [name]: value });
   }
 
   render() {
+    const { value, description } = this.state;
+    const { currencies } = this.props;
     const methods = ['Dinheiro', 'Cartão de crédito', 'Cartão de débito'];
     const tags = ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'];
-    const { currencies } = this.props;
     return (
-
-      <form>
+      <form className='wallet-form'>
         <label htmlFor="valor">
           Valor:
-          <input type="text" name="value" id="valor" onChange={ this.handleChange } />
+          <input type="text" name="value" id="valor" onChange={ this.handleChange } value={ value } />
         </label>
         <label htmlFor="describe">
           Descrição:
@@ -61,6 +53,7 @@ class Form extends React.Component {
             name="description"
             id="describe"
             onChange={ this.handleChange }
+            value={ description } 
           />
         </label>
         <label htmlFor="currency">
@@ -92,16 +85,20 @@ class Form extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({ currencies: state.wallet.currencies });
-const mapDispatchToProps = (dispatch) => ({
-  getCurrencies: () => dispatch(getValueThunk()),
-  addExpense: (state) => dispatch(expense(state)),
-});
-
 Form.propTypes = {
   currencies: PropTypes.arrayOf(PropTypes.any).isRequired,
   getCurrencies: PropTypes.func.isRequired,
-  addExpense: PropTypes.arrayOf(PropTypes.any).isRequired,
+  addExpense: PropTypes.func.isRequired,
 };
+
+const mapStateToProps = (state) => ({
+  currencies: state.wallet.currencies,
+  expenses: state.wallet.expenses,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  getCurrencies: () => dispatch(getValueThunk()),
+  addExpense: (expense) => dispatch(addExpense(expense)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Form);

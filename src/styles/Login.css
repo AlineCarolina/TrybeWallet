@@ -1,5 +1,8 @@
-body {
+.pricipal-div {
   background-color: #FFD552;
+  height: 100vh;
+  margin-top: 0px;
+  padding: 1%;
 }
 
 .fieldset {
@@ -13,6 +16,7 @@ body {
   font-size: 27px;
   border-radius: 15px;
   padding: 2%;
+  padding-top: 0;
   background-color: #FFF0C1;
   border: #ffbf00 4px solid;
 }
@@ -29,6 +33,11 @@ body {
   height: 50%;
   background-color: #FFF0C1;
   border: #ffbf00 2px solid;
+}
+
+.input::placeholder {
+  color: #ffbf00;
+  letter-spacing: 1px;
 }
 
 .button {

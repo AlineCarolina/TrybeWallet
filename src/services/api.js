@@ -5,9 +5,8 @@ export async function getValue() {
 }
 
 export async function getCoin() {
-  const fetchAPI = await fetch('https://economia.awesomeapi.com.br/json/all');
-  const jsonFetchAPI = await fetchAPI.json();
-  const coins = Object.keys(jsonFetchAPI);
+  const fetchAPI = await getValue();
+  const coins = Object.keys(fetchAPI);
   const currency = coins.filter((coin) => (coin !== 'USDT'));
   return currency;
 }
