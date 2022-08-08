@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { setEmailValue } from '../actions';
-import logo from './images/logo.png'
+import logo from '../images/logo.png'
 import '../styles/Login.css'
 
 class Login extends React.Component {
@@ -31,38 +31,41 @@ class Login extends React.Component {
     const MAXLENGTH = 6;
     const validateEmail = /\S+@\S+\.\S+/.test(email);
     return (
-      <fieldset className='fieldset'>
-        <form className='form'>
-          <img src={logo}/>
-          <label htmlFor="email">
-            <input
-              className='input'
-              type="email"
-              name="email"
-              value={ email }
-              onChange={ this.handleChange }
-            />
-          </label>
-          <label htmlFor="password">
-            <input
-              className='input'
-              type="password"
-              name="password"
-              value={ password }
-              onChange={ this.handleChange }
-            />
-          </label>
-        </form>
-        <button
-          className='button'
-          type="submit"
-          disabled={ !validateEmail || password.length < MAXLENGTH }
-          onClick={ this.clickSubmit }
-        >
-          LOGIN
-        </button>
-      </fieldset>
-
+      <div className='pricipal-div'>
+        <fieldset className='fieldset'>
+          <form className='form'>
+            <img src={logo} alt='logo'/>
+            <label htmlFor="email">
+              <input
+                className='input'
+                type="email"
+                name="email"
+                value={ email }
+                onChange={ this.handleChange }
+                placeholder="email"
+              />
+            </label>
+            <label htmlFor="password">
+              <input
+                className='input'
+                type="password"
+                name="password"
+                value={ password }
+                onChange={ this.handleChange }
+                placeholder="password"
+              />
+            </label>
+          </form>
+          <button
+            className='button'
+            type="submit"
+            disabled={ !validateEmail || password.length < MAXLENGTH }
+            onClick={ this.clickSubmit }
+          >
+            LOGIN
+          </button>
+        </fieldset>
+      </div>
     );
   }
 };
