@@ -1,46 +1,57 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import logo from '../images/logo.png'
+import svgUser from '../images/user-svgrepo-com.svg'
+import '../styles/Header.css'
 
 class Header extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       currency: 'BRL',
     };
   }
 
   render() {
-    const { email, total } = this.props;
+    const { email, expenses } = this.props;
     const { currency } = this.state;
+    const totalExpenses = expenses
+      .reduce((acc, {
+        value,
+        currency,
+        exchangeRates,
+      }) => acc + (value * exchangeRates[currency].ask), 0);
     return (
-      <section>
-        <div data-testid="email-field">
-          <span>Email:</span>
-          {email}
+      <header className='header'>
+        <div>
+          <img src={logo} alt='logo' id='min-logo-img'/>
         </div>
-        <div data-testid="total-field">
+        <div>
           <span>Total:</span>
-          {total}
+          { (totalExpenses).toFixed(2) }
         </div>
-        <div data-testid="header-currency-field">
+        <div>
           <span>Currency:</span>
           {currency}
         </div>
-      </section>
+        <div id='div-user'>
+          <img src={svgUser} alt='svgUser' className='svgUser'/>
+          {email}
+        </div>
+      </header>
     );
   }
 }
 
 const mapStateToProps = (state) => ({
   email: state.user.email,
-  total: state.wallet.expenses.reduce((total, { value, currency, exchangeRates }) => total
-  + value * exchangeRates[currency].ask, 0),
+  expenses: state.wallet.expenses,
 });
-// obtive ajuda do Filipe Brochier s2 - na questao 8 - me salvando da recuperação <3
+
 Header.propTypes = {
   email: PropTypes.string.isRequired,
-  total: PropTypes.number.isRequired,
+  expenses: PropTypes.arrayOf(PropTypes.any).isRequired,
 };
 
-export default connect(mapStateToProps, null)(Header);
+export default connect(mapStateToProps)(Header);
