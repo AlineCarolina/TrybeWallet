@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { setEmailValue } from '../actions';
-import logo from '../images/logo.png'
+import logo2 from '../images/logo2.png';
 import '../styles/Login.css'
 
 class Login extends React.Component {
@@ -32,9 +32,9 @@ class Login extends React.Component {
     const validateEmail = /\S+@\S+\.\S+/.test(email);
     return (
       <div className='pricipal-div'>
+      <img src={logo2} alt='logo' id='logo2'/>
         <fieldset className='fieldset'>
           <form className='form'>
-            <img src={logo} alt='logo'/>
             <label htmlFor="email">
               <input
                 className='input'
