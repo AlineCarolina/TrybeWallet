@@ -1,4 +1,4 @@
-import { GET_VALUE, GET_EXPENSE, REMOVE_EXPENSES } from '../actions';
+import { GET_VALUE, GET_EXPENSE, REMOVE_EXPENSE } from '../actions';
 
 const INITIAL_STATE = {
   currencies: [],
@@ -13,7 +13,7 @@ const reducerWallet = (state = INITIAL_STATE, action) => {
     return { ...state,
       expenses: [...state.expenses, { id: state.expenses.length, ...action.payload }],
     };
-  case REMOVE_EXPENSES:
+  case REMOVE_EXPENSE:
     return {
       ...state,
       expenses: state.expenses.filter((expense) => expense.id !== action.payload),
