@@ -1,5 +1,5 @@
 .header {
-  background-color: #ffbf00;
+  background-color: #820AD1;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -8,11 +8,12 @@
   padding-left: 30px;
   padding-right: 30px;
   letter-spacing: 1px;
+  color: white;
+  letter-spacing: 1px;
 }
 
 #min-logo-img {
-  width: 50px;
-  border-radius: 10px;
+  width: 60px;
 }
 
 .svgUser {

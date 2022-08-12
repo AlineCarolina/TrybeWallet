@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import logo from '../images/logo.png'
-import svgUser from '../images/user-svgrepo-com.svg'
+import svgUser from '../images/user-icon.svg'
 import '../styles/Header.css'
 
 class Header extends React.Component {
