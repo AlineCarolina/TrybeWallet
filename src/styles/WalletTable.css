@@ -1,14 +1,50 @@
 table {
-  border: 1px solid blueviolet;
   margin: 50px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 20px;
+  border-radius: 20px;
+  border: #820AD1 0.5px solid;
+  border-radius: 15px;
+  padding: 10px;
 }
 
 tr {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-evenly;
+  text-align: center;
+}
+
+th {
+  font-size: small;
+  background-color: #e9e9e9;
+  width: 110px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 5px;
+  border-radius: 15px;
+}
+
+td {
+  width: 110px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 5px;
+  border-radius: 15px;
+}
+
+.button-edit-del {
+  border-radius: 15px;
+  padding: 5px;
+  border: #820AD1 1px solid;
+  color: #820AD1;
+}
+
+.button-edit-del:hover {
+  background-color: #820AD1;
+  color: #e9e9e9;
 }

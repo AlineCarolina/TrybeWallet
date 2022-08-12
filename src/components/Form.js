@@ -95,7 +95,7 @@ class Form extends React.Component {
               </select>
             </label>
           </div>
-          <img type="button" src={seta} onClick={ this.handleClick } id="button-add" />
+          <img type="button" src={seta} onClick={ this.handleClick } id="button-add" alt='img-next'/>
         </form>
       </div>
     );

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { removeExpense } from '../actions';
+import { removeExpense, toggleEditMode } from '../actions';
 import '../styles/WalletTable.css'
 
 class WalletTable extends React.Component {
@@ -32,16 +32,18 @@ class WalletTable extends React.Component {
         </td>
         <td>Real</td>
         <td>
-          {/* <button
+          <button
             type="button"
-            data-testid="edit-btn"
+            id="edit-btn"
+            className='button-edit-del'
             onClick={ () => setEditMode(id) }
           >
             Editar
-          </button> */}
+          </button>
           <button
             type="button"
-            data-testid="delete-btn"
+            id="delete-btn"
+            className='button-edit-del'
             onClick={ () => setRemoveExpense(id) }
           >
             Remover
@@ -80,13 +82,15 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  setRemoveExpense: (id) => dispatch(removeExpense(id))/* ,
-  setEditMode: (id) => dispatch(toggleEditMode(id)), */
+  setRemoveExpense: (id) => dispatch(removeExpense(id)) ,
+  setEditMode: (id) => dispatch(toggleEditMode(id)),
 });
 
 
 WalletTable.propTypes = {
   expenses: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
+  setRemoveExpense: PropTypes.func.isRequired,
+  setEditMode: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(WalletTable);

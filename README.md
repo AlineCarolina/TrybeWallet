@@ -3,6 +3,8 @@ In this project, an expense control wallet with a currency converter was develop
   * Add, remove and edit an expense;
   * View a table with your expenses;
   * View total spend converted to a currency of choice;
+
+  ![](/src/images/project.gif)
 ---
 
 ## About the project
