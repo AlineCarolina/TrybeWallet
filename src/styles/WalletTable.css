@@ -1,0 +1,14 @@
+table {
+  border: 1px solid blueviolet;
+  margin: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+}
+
+tr {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
