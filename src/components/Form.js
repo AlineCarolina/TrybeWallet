@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { getValueThunk, addExpense } from '../actions';
 import '../styles/Form.css'
 import { getValue } from '../services/api';
+import seta from '../images/seta.png'
 
 class Form extends React.Component {
   constructor(props) {
@@ -16,12 +17,12 @@ class Form extends React.Component {
       description: '',
       exchangeRates: null,
     };
-  }
+  };
 
   componentDidMount() {
     const { getCurrencies } = this.props;
     getCurrencies();
-  }
+  };
 
   handleClick = async (e) => {
     e.preventDefault();
@@ -29,11 +30,11 @@ class Form extends React.Component {
     const exchangeRates = await getValue();
     this.setState({ exchangeRates, });
     addExpense(this.state);
-  }
+  };
 
   handleChange = ({ target: { name, value } }) => {
     this.setState({ [name]: value });
-  }
+  };
 
   render() {
     const { value, description } = this.state;
@@ -41,49 +42,65 @@ class Form extends React.Component {
     const methods = ['Dinheiro', 'Cartão de crédito', 'Cartão de débito'];
     const tags = ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'];
     return (
-      <form className='wallet-form'>
-        <label htmlFor="valor">
-          Valor:
-          <input type="text" name="value" id="valor" onChange={ this.handleChange } value={ value } />
-        </label>
-        <label htmlFor="describe">
-          Descrição:
-          <input
-            type="text"
-            name="description"
-            id="describe"
-            onChange={ this.handleChange }
-            value={ description } 
-          />
-        </label>
-        <label htmlFor="currency">
-          Moeda:
-          <select name="currency" id="currency" onChange={ this.handleChange }>
-            {currencies.map((currency) => (
-              <option key={ currency } value={ currency }>{ currency }</option>))}
-          </select>
-        </label>
-        <label htmlFor="pag">
-          Método de pagamento:
-          <select name="method" id="pag" onChange={ this.handleChange }>
-            {methods.map((method, index) => (
-              <option value={ method } key={ index }>{method}</option>
-            ))}
-          </select>
-        </label>
-        <label htmlFor="tag">
-          Tag:
-          <select name="tag" id="tag" onChange={ this.handleChange }>
-            {tags.map((tag, index) => (
-              <option value={ tag } key={ index }>{tag}</option>
-            ))}
-          </select>
-        </label>
-        <button type="button" onClick={ this.handleClick }>Adicionar despesa</button>
-      </form>
+      <div id='pricipal-div-form'>
+        <h1 id='h1-form'>Adicione suas despesas</h1>
+        <form className='wallet-form'>
+          <div id='div-in-form'>
+            <label htmlFor="valor">
+              Valor:
+              <input
+                type="number"
+                min="1.00"
+                max="10000.00"
+                step="0.50"
+                name="value"
+                id="valor"
+                onChange={ this.handleChange }
+                value={ value }
+                className="style-input"
+              />
+            </label>
+            <label htmlFor="describe">
+              Descrição:
+              <input
+                type="text"
+                name="description"
+                id="describe"
+                onChange={ this.handleChange }
+                value={ description }
+                className="style-input"
+              />
+            </label>
+            <label htmlFor="currency">
+              Moeda:
+              <select name="currency" id="currency" onChange={ this.handleChange }>
+                {currencies.map((currency) => (
+                  <option key={ currency } value={ currency }>{ currency }</option>))}
+              </select>
+            </label>
+            <label htmlFor="pag">
+              Método de pagamento:
+              <select name="method" id="pag" onChange={ this.handleChange }>
+                {methods.map((method, index) => (
+                  <option value={ method } key={ index }>{method}</option>
+                ))}
+              </select>
+            </label>
+            <label htmlFor="tag">
+              Tag:
+              <select name="tag" id="tag" onChange={ this.handleChange }>
+                {tags.map((tag, index) => (
+                  <option value={ tag } key={ index }>{tag}</option>
+                ))}
+              </select>
+            </label>
+          </div>
+          <img type="button" src={seta} onClick={ this.handleClick } id="button-add" />
+        </form>
+      </div>
     );
   }
-}
+};
 
 Form.propTypes = {
   currencies: PropTypes.arrayOf(PropTypes.any).isRequired,
