@@ -1,4 +1,4 @@
-# Project TrybeWallet
+# Project TrybeWallet! 🪙​💸​
 In this project, an expense control wallet with a currency converter was developed. By using this application the user can:
   * Add, remove and edit an expense;
   * View a table with your expenses;
