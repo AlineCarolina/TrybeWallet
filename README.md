@@ -22,7 +22,7 @@ This project was developed with a focus on learning how to use Redux in a React 
 ---
 
 ## How to run the project
-To install and run the project you must clone this repository:
+Application Deployment is available at [here](https://trybe-wallet-alinecarolina.vercel.app/) but if you want, here are the instructions to run the project:
 ```
 $ git clone git@github.com:AlineCarolina/TrybeWallet.git
 ```
